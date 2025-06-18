@@ -9,32 +9,18 @@ import {
   ArrowLeft,
   UserCheck,
 } from "lucide-react";
-import { useUserStore } from "@/store/user";
-import { useNavigate } from "react-router";
-import { useToast } from "@/hooks/use-toast";
-
 
 function Signup() {
-
-
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { toast } = useToast();
-  const [userType, setUserType] = useState("customer"); // 'customer' or 'restaurant'
+  const [userType, setUserType] = useState("customer");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     fullName: "",
     password: "",
     confirmPassword: "",
   });
-
-  const newUser = {
-    name: formData.fullName,
-    email: formData.email,
-    password: formData.password,
-    role: userType === "customer" ? "CUSTOMER" : "VENDOR",
-  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -43,170 +29,149 @@ function Signup() {
     });
   };
 
-  const {createUser} = useUserStore();
-
   const handleSubmit = async () => {
-    const {success,message} = await createUser(newUser);
-    if(success && formData.password === formData.confirmPassword){
-      toast({
-        title: "Success",
-        description: "You successfully created a munchmate account",
-        type: "success",
-      });      
-      setFormData({
-        email: "",
-        fullName: "",
-        password: "",
-        confirmPassword: "",
-      });
-      console.log("Signup attempt:", { ...formData, userType });
-      if(newUser.role === "VENDOR"){
-        toast({
-          title: "Welcome aboard, Chef! 🍽️🎉",
-          description: "Your restaurant is now part of the MunchMate family! 🌟",          
-          type: "success",
-        });
-        
-        navigate("/restaurants");
-      }else if(newUser.role === "CUSTOMER"){
-        toast({
-          title: "Welcome to MunchMate! Fellow Foodie! 🍽️🎉",
-          description: "Start exploring and ordering your favorite dishes! 🍔🍕",
-          type: "success",
-        });
-        navigate("/customers");      
-    }else{
-      toast({
-        title: "Error",
-        description: "Please check your credentials",
-        type: "error",
-      });
-      alert(message);
+    if (!termsAccepted) {
+      alert("Please accept the terms and conditions");
+      return;
     }
-     
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    console.log("Signup attempt:", { ...formData, userType });
   };
-  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center px-6 py-12">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-      </div>
+    <div className="min-h-screen bg-white">
+      {/* Minimal Navigation */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-8 py-6">
+          <button
+            className="flex items-center space-x-3 text-gray-600 hover:text-orange-500 transition-colors duration-500"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="font-light tracking-wide">Return</span>
+          </button>
+        </div>
+      </nav>
 
-      <div className="relative w-full max-w-md">
-        {/* Back Button */}
-        <button className="absolute -top-16 left-0 flex items-center space-x-2 text-gray-600 hover:text-orange-600 transition-colors">
-          <ArrowLeft className="w-5 h-5" />
-          <span className="font-medium">Back to Home</span>
-        </button>
-
-        {/* Signup Card */}
-        <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-gray-900 to-black p-8 text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center">
-                <ChefHat className="w-8 h-8 text-white" />
+      {/* Main Content */}
+      <div className="pt-32 pb-24 px-8">
+        <div className="max-w-md mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-16">
+            <div className="w-1 h-12 bg-gradient-to-b from-green-500 to-yellow-500 mx-auto mb-8"></div>
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-16 border border-gray-300 flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50">
+                <ChefHat className="w-8 h-8 text-green-500" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">
-              Join MunchMate
+            <h1 className="text-3xl font-extralight mb-4 tracking-tight">
+              <span className="block text-gray-700">Begin Your</span>
+              <span className="block bg-gradient-to-r from-green-500 to-yellow-500 bg-clip-text text-transparent font-light">
+                Journey
+              </span>
             </h1>
-            <p className="text-gray-300">Create your delicious journey today</p>
+            <div className="w-8 h-px bg-gradient-to-r from-orange-500 to-red-500 mx-auto mt-6"></div>
           </div>
 
-          {/* User Type Toggle */}
-          <div className="p-8 pb-6">
-            <div className="bg-gray-100 rounded-2xl p-1 mb-8">
-              <div className="grid grid-cols-2 gap-1">
-                <button
-                  onClick={() => setUserType("customer")}
-                  className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
-                    userType === "customer"
-                      ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-800"
-                  }`}
-                >
-                  Food Lover
-                </button>
-                <button
-                  onClick={() => setUserType("restaurant")}
-                  className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
-                    userType === "restaurant"
-                      ? "bg-gradient-to-r from-lime-500 to-yellow-500 text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-800"
-                  }`}
-                >
-                  Restaurant
-                </button>
-              </div>
+          {/* User Type Selection */}
+          <div className="mb-12">
+            <div className="grid grid-cols-2 gap-1 bg-gray-50 p-1 border border-gray-200">
+              <button
+                onClick={() => setUserType("customer")}
+                className={`py-4 px-6 font-light text-sm tracking-wide transition-all duration-500 ${
+                  userType === "customer"
+                    ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
+                    : "text-gray-600 hover:text-gray-800"
+                }`}
+              >
+                Food Lover
+              </button>
+              <button
+                onClick={() => setUserType("restaurant")}
+                className={`py-4 px-6 font-light text-sm tracking-wide transition-all duration-500 ${
+                  userType === "restaurant"
+                    ? "bg-gradient-to-r from-green-500 to-yellow-500 text-white"
+                    : "text-gray-600 hover:text-gray-800"
+                }`}
+              >
+                Restaurant
+              </button>
             </div>
+          </div>
 
-            {/* Signup Form */}
-            <div className="space-y-6">
-              {/* Full Name Field */}
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+          {/* Signup Form */}
+          <div className="space-y-8">
+            {/* Full Name Input */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-green-500 to-yellow-500"></div>
+              <div className="pl-6">
+                <label className="block text-xs font-light text-gray-500 mb-3 tracking-widest uppercase">
                   Full Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-300 bg-gray-50 focus:bg-white"
+                    className="w-full pl-8 pr-0 py-4 bg-transparent border-0 border-b border-gray-200 focus:border-green-500 outline-none transition-all duration-500 text-gray-700 font-light placeholder-gray-400"
                     placeholder="John Doe"
                     required
                   />
                 </div>
               </div>
+            </div>
 
-              {/* Email Field */}
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+            {/* Email Input */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-yellow-500 to-orange-500"></div>
+              <div className="pl-6">
+                <label className="block text-xs font-light text-gray-500 mb-3 tracking-widest uppercase">
                   Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-300 bg-gray-50 focus:bg-white"
-                    placeholder="chef@restaurant.com"
+                    className="w-full pl-8 pr-0 py-4 bg-transparent border-0 border-b border-gray-200 focus:border-yellow-500 outline-none transition-all duration-500 text-gray-700 font-light placeholder-gray-400"
+                    placeholder="your@email.com"
                     required
                   />
                 </div>
               </div>
+            </div>
 
-              {/* Password Field */}
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+            {/* Password Input */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-orange-500 to-red-500"></div>
+              <div className="pl-6">
+                <label className="block text-xs font-light text-gray-500 mb-3 tracking-widest uppercase">
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-12 pr-12 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-300 bg-gray-50 focus:bg-white"
-                    placeholder="Create a strong password"
+                    className="w-full pl-8 pr-8 py-4 bg-transparent border-0 border-b border-gray-200 focus:border-orange-500 outline-none transition-all duration-500 text-gray-700 font-light placeholder-gray-400"
+                    placeholder="••••••••"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-300"
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -216,27 +181,30 @@ function Signup() {
                   </button>
                 </div>
               </div>
+            </div>
 
-              {/* Confirm Password Field */}
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+            {/* Confirm Password Input */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-red-500 to-orange-500"></div>
+              <div className="pl-6">
+                <label className="block text-xs font-light text-gray-500 mb-3 tracking-widest uppercase">
                   Confirm Password
                 </label>
                 <div className="relative">
-                  <UserCheck className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <UserCheck className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    className="w-full pl-12 pr-12 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all duration-300 bg-gray-50 focus:bg-white"
-                    placeholder="Confirm your password"
+                    className="w-full pl-8 pr-8 py-4 bg-transparent border-0 border-b border-gray-200 focus:border-red-500 outline-none transition-all duration-500 text-gray-700 font-light placeholder-gray-400"
+                    placeholder="••••••••"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-300"
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -246,65 +214,106 @@ function Signup() {
                   </button>
                 </div>
               </div>
+            </div>
 
-              {/* Terms & Conditions */}
-              <div className="flex items-start space-x-3">
+            {/* Terms Agreement */}
+            <div className="flex items-start space-x-4 pt-4">
+              <div className="relative mt-1">
                 <input
                   type="checkbox"
                   id="terms"
-                  className="w-4 h-4 mt-1 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="sr-only"
                   required
                 />
-                <label
-                  htmlFor="terms"
-                  className="text-sm text-gray-600 leading-relaxed"
+                <div
+                  className={`w-4 h-4 border border-gray-300 bg-white cursor-pointer transition-all duration-300 ${
+                    termsAccepted
+                      ? "bg-gradient-to-r from-orange-500 to-red-500 border-orange-500"
+                      : "hover:border-orange-300"
+                  }`}
+                  onClick={() => setTermsAccepted(!termsAccepted)}
                 >
-                  I agree to the{" "}
-                  <button
-                    type="button"
-                    className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
-                  >
-                    Terms of Service
-                  </button>{" "}
-                  and{" "}
-                  <button
-                    type="button"
-                    className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
-                  >
-                    Privacy Policy
-                  </button>
-                </label>
+                  {termsAccepted && (
+                    <svg
+                      className="w-3 h-3 text-white m-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </div>
               </div>
+              <label
+                htmlFor="terms"
+                className="text-sm font-light text-gray-600 leading-relaxed tracking-wide cursor-pointer"
+                onClick={() => setTermsAccepted(!termsAccepted)}
+              >
+                I agree to the{" "}
+                <button
+                  type="button"
+                  className="text-orange-500 hover:text-orange-600 font-light transition-colors duration-500"
+                >
+                  Terms of Service
+                </button>{" "}
+                and{" "}
+                <button
+                  type="button"
+                  className="text-orange-500 hover:text-orange-600 font-light transition-colors duration-500"
+                >
+                  Privacy Policy
+                </button>
+              </label>
+            </div>
 
-              {/* Signup Button */}
+            {/* Signup Button */}
+            <div className="pt-8">
               <button
                 onClick={handleSubmit}
-                className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                className={`group relative w-full py-6 border transition-all duration-700 overflow-hidden ${
                   userType === "customer"
-                    ? "bg-gradient-to-r from-orange-500 to-red-500"
-                    : "bg-gradient-to-r from-lime-500 to-yellow-500"
+                    ? "border-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500"
+                    : "border-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-yellow-500"
                 }`}
               >
-                Create My MunchMate Account
+                <div className="relative z-10">
+                  <span
+                    className={`font-light tracking-widest text-sm transition-colors duration-500 ${
+                      userType === "customer"
+                        ? "text-orange-600 group-hover:text-white"
+                        : "text-green-600 group-hover:text-white"
+                    }`}
+                  >
+                    CREATE ACCOUNT
+                  </span>
+                </div>
               </button>
             </div>
+          </div>
 
-            {/* Divider */}
-            <div className="relative my-8">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">
-                  or sign up with
-                </span>
-              </div>
+          {/* Divider */}
+          <div className="relative py-8">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full h-px bg-gray-200"></div>
             </div>
+            <div className="relative flex justify-center">
+              <span className="px-6 bg-white text-xs font-light text-gray-500 tracking-widest">
+                OR CONTINUE WITH
+              </span>
+            </div>
+          </div>
 
-            {/* Social Signup */}
-            <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center py-3 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+          {/* Social Signup */}
+          <div className="grid grid-cols-2 gap-1">
+            <button className="group border border-gray-200 py-4 hover:bg-gradient-to-br hover:from-gray-50 hover:to-white transition-all duration-500">
+              <div className="flex items-center justify-center space-x-2">
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -322,34 +331,34 @@ function Signup() {
                     d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                   />
                 </svg>
-                Google
-              </button>
-              <button className="flex items-center justify-center py-3 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="#1877F2"
-                  viewBox="0 0 24 24"
-                >
+                <span className="text-sm font-light text-gray-600 tracking-wide">
+                  Google
+                </span>
+              </div>
+            </button>
+            <button className="group border border-gray-200 py-4 hover:bg-gradient-to-br hover:from-gray-50 hover:to-white transition-all duration-500">
+              <div className="flex items-center justify-center space-x-2">
+                <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
-                Facebook
-              </button>
-            </div>
+                <span className="text-sm font-light text-gray-600 tracking-wide">
+                  Facebook
+                </span>
+              </div>
+            </button>
+          </div>
 
-            {/* Login Link */}
-            <div className="text-center mt-8 pt-6 border-t border-gray-100">
-              <p className="text-gray-600">
-                Already have an account?{" "}
-                <button
-                  className="text-orange-600 hover:text-orange-700 font-semibold transition-colors"
-                onClick={() => {
-                  window.location.href = "/login";
-                }}
-                >
-                  Sign in here
-                </button>
-              </p>
-            </div>
+          {/* Footer */}
+          <div className="text-center pt-12 border-t border-gray-100">
+            <p className="text-sm font-light text-gray-600 leading-relaxed">
+              Already have an account?{" "}
+              <button
+                className="text-orange-500 hover:text-orange-600 font-light transition-colors duration-500"
+                onClick={() => console.log("Navigate to login")}
+              >
+                Sign In
+              </button>
+            </p>
           </div>
         </div>
       </div>

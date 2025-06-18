@@ -20,21 +20,21 @@ const MunchMateLanding = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center">
-              <ChefHat className="w-6 h-6 text-white" />
+    <div className="min-h-screen bg-white">
+      {/* Navigation - Minimal Japanese style with color accent */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 rounded-sm bg-gradient-to-br from-green-500 to-yellow-500 flex items-center justify-center">
+              <ChefHat className="w-5 h-5 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+            <span className="text-xl font-light tracking-wider text-black">
               MunchMate
             </span>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-8">
             <button
-              className="px-6 py-2 text-gray-700 hover:text-orange-600 transition-colors font-medium"
+              className="text-sm font-light text-gray-600 hover:text-orange-500 transition-colors duration-500 tracking-wide"
               onClick={() => {
                 window.location.href = "/login";
               }}
@@ -43,9 +43,9 @@ const MunchMateLanding = () => {
             </button>
             <button
               type="button"
-              className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="px-8 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-light tracking-wide hover:from-orange-600 hover:to-red-600 transition-all duration-500 border border-orange-500 hover:shadow-lg hover:shadow-orange-500/20"
               onClick={() => {
-                window.location.href = "/signup"
+                window.location.href = "/signup";
               }}
             >
               Get Started
@@ -54,55 +54,71 @@ const MunchMateLanding = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-lime-600 via-yellow-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
-                Elevate Your
-              </span>
-              <br />
-              <span className="text-gray-800">Culinary Journey</span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      {/* Hero Section - Zen minimalism */}
+      <section className="pt-32 pb-24 px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="mb-8">
+              <div className="w-1 h-16 bg-gradient-to-b from-green-500 to-yellow-500 mx-auto mb-8"></div>
+              <h1 className="text-5xl md:text-6xl font-extralight mb-4 tracking-tight leading-tight">
+                <span className="block bg-gradient-to-r from-green-500 to-yellow-500 bg-clip-text text-transparent mb-2">
+                  Elevate Your
+                </span>
+                <span className="block font-light text-gray-700">Culinary</span>
+                <span className="block bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  Journey
+                </span>
+              </h1>
+              <div className="w-12 h-px bg-gradient-to-r from-orange-500 to-red-500 mx-auto mt-8"></div>
+            </div>
+            <p className="text-lg font-light text-gray-600 max-w-2xl mx-auto leading-relaxed tracking-wide">
               Where exceptional restaurants meet discerning diners. MunchMate
+              <br />
               connects culinary artisans with food enthusiasts, creating
+              <br />
               unforgettable dining experiences.
             </p>
           </div>
 
-          {/* Dual CTA */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-lime-400 to-yellow-500 p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105">
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
-              <div className="relative z-10">
-                <Crown className="w-12 h-12 text-white mb-4" />
-                <h3 className="text-2xl font-bold text-white mb-3">
+          {/* Dual CTA - Clean geometric design with colors */}
+          <div className="grid md:grid-cols-2 gap-1 max-w-3xl mx-auto">
+            <div className="group relative bg-gradient-to-br from-green-50 to-yellow-50 hover:from-green-100 hover:to-yellow-100 transition-all duration-700 p-12 border border-green-200">
+              <div className="text-center">
+                <div className="w-12 h-12 border border-green-500 mx-auto mb-8 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-green-500 group-hover:to-yellow-500 transition-colors duration-500">
+                  <Crown className="w-6 h-6 text-green-500 group-hover:text-white transition-colors duration-500" />
+                </div>
+                <h3 className="text-xl font-light text-black mb-6 tracking-wide">
                   For Restaurant Owners
                 </h3>
-                <p className="text-white/90 mb-6">
-                  Showcase your culinary mastery and attract food connoisseurs
-                  who appreciate fine dining.
+                <p className="text-gray-600 font-light mb-8 text-sm leading-relaxed">
+                  Showcase your culinary mastery and
+                  <br />
+                  attract food connoisseurs who
+                  <br />
+                  appreciate fine dining.
                 </p>
-                <button className="w-full bg-white text-yellow-600 font-semibold py-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <button className="w-full border border-green-500 text-green-600 font-light py-4 hover:bg-gradient-to-r hover:from-green-500 hover:to-yellow-500 hover:text-white transition-all duration-500 tracking-wider text-sm">
                   Join as Restaurant
                 </button>
               </div>
             </div>
 
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105">
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
-              <div className="relative z-10">
-                <Heart className="w-12 h-12 text-white mb-4" />
-                <h3 className="text-2xl font-bold text-white mb-3">
+            <div className="group relative bg-gradient-to-br from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 transition-all duration-700 p-12 border border-orange-200">
+              <div className="text-center">
+                <div className="w-12 h-12 border border-orange-500 mx-auto mb-8 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-red-500 transition-colors duration-500">
+                  <Heart className="w-6 h-6 text-orange-500 group-hover:text-white transition-colors duration-500" />
+                </div>
+                <h3 className="text-xl font-light text-black mb-6 tracking-wide">
                   For Food Lovers
                 </h3>
-                <p className="text-white/90 mb-6">
-                  Discover hidden gems and savor extraordinary dishes crafted by
+                <p className="text-gray-600 font-light mb-8 text-sm leading-relaxed">
+                  Discover hidden gems and savor
+                  <br />
+                  extraordinary dishes crafted by
+                  <br />
                   passionate chefs.
                 </p>
-                <button className="w-full bg-white text-red-600 font-semibold py-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <button className="w-full border border-orange-500 text-orange-600 font-light py-4 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-500 tracking-wider text-sm">
                   Explore Restaurants
                 </button>
               </div>
@@ -111,125 +127,166 @@ const MunchMateLanding = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Crafted for{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+      {/* Features Section - Grid layout with subtle shadows */}
+      <section className="py-24 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-5xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <div className="w-1 h-8 bg-gradient-to-b from-green-500 to-yellow-500 mx-auto mb-6"></div>
+            <h2 className="text-3xl font-light text-black mb-4 tracking-wide">
+              Crafted for
+              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent font-normal">
+                {" "}
                 Excellence
               </span>
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Premium tools and insights designed for the sophisticated food
-              industry
+            <p className="text-gray-600 font-light max-w-xl mx-auto text-sm leading-relaxed">
+              Premium tools and insights designed for
+              <br />
+              the sophisticated food industry
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Utensils className="w-8 h-8 text-white" />
+          <div className="grid md:grid-cols-3 gap-px bg-gray-200">
+            <div className="group bg-white p-12 hover:bg-gradient-to-br hover:from-green-50 hover:to-yellow-50 transition-all duration-700">
+              <div className="text-center">
+                <div className="w-16 h-16 border border-gray-300 mx-auto mb-8 flex items-center justify-center group-hover:border-green-500 group-hover:bg-gradient-to-br group-hover:from-green-500 group-hover:to-yellow-500 transition-colors duration-500">
+                  <Utensils className="w-8 h-8 text-gray-600 group-hover:text-white transition-colors duration-500" />
+                </div>
+                <h3 className="text-lg font-light text-black mb-4 tracking-wide">
+                  Curated Excellence
+                </h3>
+                <p className="text-gray-600 font-light text-sm leading-relaxed">
+                  Only the finest establishments join our
+                  <br />
+                  exclusive network of culinary destinations.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                Curated Excellence
-              </h3>
-              <p className="text-gray-600">
-                Only the finest establishments join our exclusive network of
-                culinary destinations.
-              </p>
             </div>
 
-            <div className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="group bg-white p-12 hover:bg-gradient-to-br hover:from-yellow-50 hover:to-orange-50 transition-all duration-700">
+              <div className="text-center">
+                <div className="w-16 h-16 border border-gray-300 mx-auto mb-8 flex items-center justify-center group-hover:border-yellow-500 group-hover:bg-gradient-to-br group-hover:from-yellow-500 group-hover:to-orange-500 transition-colors duration-500">
+                  <TrendingUp className="w-8 h-8 text-gray-600 group-hover:text-white transition-colors duration-500" />
+                </div>
+                <h3 className="text-lg font-light text-black mb-4 tracking-wide">
+                  Smart Analytics
+                </h3>
+                <p className="text-gray-600 font-light text-sm leading-relaxed">
+                  Sophisticated insights to help restaurants
+                  <br />
+                  understand and delight their clientele.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                Smart Analytics
-              </h3>
-              <p className="text-gray-600">
-                Sophisticated insights to help restaurants understand and
-                delight their clientele.
-              </p>
             </div>
 
-            <div className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Clock className="w-8 h-8 text-white" />
+            <div className="group bg-white p-12 hover:bg-gradient-to-br hover:from-orange-50 hover:to-red-50 transition-all duration-700">
+              <div className="text-center">
+                <div className="w-16 h-16 border border-gray-300 mx-auto mb-8 flex items-center justify-center group-hover:border-orange-500 group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-red-500 transition-colors duration-500">
+                  <Clock className="w-8 h-8 text-gray-600 group-hover:text-white transition-colors duration-500" />
+                </div>
+                <h3 className="text-lg font-light text-black mb-4 tracking-wide">
+                  Seamless Experience
+                </h3>
+                <p className="text-gray-600 font-light text-sm leading-relaxed">
+                  Effortless reservations and personalized
+                  <br />
+                  recommendations for discerning diners.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                Seamless Experience
-              </h3>
-              <p className="text-gray-600">
-                Effortless reservations and personalized recommendations for
-                discerning diners.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="group">
-              <div className="text-4xl font-bold bg-gradient-to-r from-lime-600 to-yellow-500 bg-clip-text text-transparent mb-2">
-                500+
+      {/* Social Proof - Minimalist stats */}
+      <section className="py-24 bg-white border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-8">
+          <div className="grid md:grid-cols-3 gap-16 mb-20">
+            <div className="text-center group">
+              <div className="text-4xl font-extralight text-black mb-2 group-hover:scale-105 transition-transform duration-500">
+                500
+                <span className="bg-gradient-to-r from-green-500 to-yellow-500 bg-clip-text text-transparent">
+                  +
+                </span>
               </div>
-              <p className="text-gray-600 font-medium">Premium Restaurants</p>
+              <div className="w-8 h-px bg-gradient-to-r from-green-500 to-yellow-500 mx-auto mb-2"></div>
+              <p className="text-gray-600 font-light text-sm tracking-wide">
+                Premium Restaurants
+              </p>
             </div>
-            <div className="group">
-              <div className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-2">
-                50K+
+            <div className="text-center group">
+              <div className="text-4xl font-extralight text-black mb-2 group-hover:scale-105 transition-transform duration-500">
+                50K
+                <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                  +
+                </span>
               </div>
-              <p className="text-gray-600 font-medium">Food Connoisseurs</p>
+              <div className="w-8 h-px bg-gradient-to-r from-yellow-500 to-orange-500 mx-auto mb-2"></div>
+              <p className="text-gray-600 font-light text-sm tracking-wide">
+                Food Connoisseurs
+              </p>
             </div>
-            <div className="group">
-              <div className="text-4xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent mb-2">
-                4.9★
+            <div className="text-center group">
+              <div className="text-4xl font-extralight text-black mb-2 group-hover:scale-105 transition-transform duration-500">
+                4.9
+                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  ★
+                </span>
               </div>
-              <p className="text-gray-600 font-medium">Average Rating</p>
+              <div className="w-8 h-px bg-gradient-to-r from-orange-500 to-red-500 mx-auto mb-2"></div>
+              <p className="text-gray-600 font-light text-sm tracking-wide">
+                Average Rating
+              </p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-12">
-            <div className="flex justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-6 h-6 text-yellow-400 fill-current"
-                />
-              ))}
+          <div className="border border-gray-200 p-12 bg-gradient-to-br from-gray-50 to-white">
+            <div className="text-center">
+              <div className="flex justify-center mb-8">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 fill-current mx-1 ${
+                      i < 2
+                        ? "text-green-500"
+                        : i < 4
+                        ? "text-yellow-500"
+                        : "text-orange-500"
+                    }`}
+                  />
+                ))}
+              </div>
+              <blockquote className="text-lg font-light text-black italic mb-8 max-w-2xl mx-auto leading-relaxed">
+                "MunchMate has transformed how we connect with food lovers. The
+                quality of diners we attract through this platform truly
+                appreciates our culinary artistry."
+              </blockquote>
+              <div className="w-12 h-px bg-gradient-to-r from-yellow-500 to-orange-500 mx-auto mb-4"></div>
+              <cite className="text-gray-600 font-light text-sm tracking-wide">
+                Chef Marco Aurelius, Le Petit Jardin ★★★
+              </cite>
             </div>
-            <blockquote className="text-xl text-gray-700 italic mb-4 max-w-3xl mx-auto">
-              "MunchMate has transformed how we connect with food lovers. The
-              quality of diners we attract through this platform truly
-              appreciates our culinary artistry."
-            </blockquote>
-            <cite className="text-gray-600 font-medium">
-              Chef Marco Aurelius, Le Petit Jardin ★★★
-            </cite>
           </div>
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="py-16 bg-gradient-to-r from-gray-900 to-black text-white">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Begin Your{" "}
-            <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+      {/* Footer CTA - Dramatic black section with color accents */}
+      <section className="py-24 bg-gradient-to-br from-gray-900 to-black text-white border-t border-gray-800">
+        <div className="max-w-3xl mx-auto text-center px-8">
+          <div className="w-1 h-12 bg-gradient-to-b from-green-500 to-red-500 mx-auto mb-8"></div>
+          <h2 className="text-3xl font-light mb-8 tracking-wide leading-tight">
+            Ready to Begin Your
+            <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent font-normal mt-2">
               Gourmet Journey
             </span>
-            ?
+            <span className="block font-light mt-2">?</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join the most sophisticated dining community where culinary passion
-            meets discerning taste.
+          <p className="text-gray-300 font-light mb-12 max-w-xl mx-auto text-sm leading-relaxed">
+            Join the most sophisticated dining community where
+            <br />
+            culinary passion meets discerning taste.
           </p>
-          <button className="px-12 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white text-lg font-semibold rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+          <button className="px-16 py-4 border border-gradient-to-r from-orange-500 to-red-500 bg-gradient-to-r from-orange-500 to-red-500 text-white font-light hover:from-orange-600 hover:to-red-600 transition-all duration-500 tracking-widest text-sm hover:shadow-lg hover:shadow-orange-500/20">
             Start Your Experience
           </button>
         </div>
