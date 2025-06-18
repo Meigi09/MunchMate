@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+
+  :root {
+    /* Base colors */
+
+    --background: 0 0% 100%;
+    /* White */
+    --foreground: 0 0% 9%;
+    /* Near black */
+
+    /* Card colors */
+    --card: 0 0% 100%;
+    /* White */
+    --card-foreground: 0 0% 9%;
+    /* Near black */
+
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    /* White */
+    --popover-foreground: 0 0% 9%;
+    /* Near black */
+
+    /* Primary - Using the vibrant green from your palette */
+    --primary: 74 64% 50%;
+    /* #8EA604 equivalent */
+    --primary-foreground: 0 0% 100%;
+    /* White */
+
+    /* Secondary - Using warm yellow */
+    --secondary: 45 100% 67%;
+    /* #F5B800 equivalent */
+    --secondary-foreground: 0 0% 9%;
+    /* Near black */
+
+    /* Muted - Light gray */
+    --muted: 0 0% 96%;
+    /* Light gray */
+    --muted-foreground: 0 0% 45%;
+    /* Medium gray */
+
+    /* Accent - Using warm orange */
+    --accent: 32 100% 50%;
+    /* #EC9F05 equivalent */
+    --accent-foreground: 0 0% 100%;
+    /* White */
+
+    /* Destructive - Using the red from palette */
+    --destructive: 14 100% 50%;
+    /* #BF3100 equivalent */
+    --destructive-foreground: 0 0% 100%;
+    /* White */
+
+    /* Borders and inputs */
+    --border: 0 0% 90%;
+    /* Light gray */
+    --input: 0 0% 95%;
+    /* Very light gray */
+    --ring: 74 64% 50%;
+    /* Same as primary */
+
+    /* Chart colors using your palette */
+    --chart-1: 74 64% 50%;
+    /* Green - #8EA604 */
+    --chart-2: 45 100% 67%;
+    /* Yellow - #F5B800 */
+    --chart-3: 32 100% 50%;
+    /* Orange - #EC9F05 */
+    --chart-4: 20 100% 45%;
+    /* Dark orange - #D76A03 */
+    --chart-5: 14 100% 50%;
+    /* Red - #BF3100 */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode background */
+    --background: 0 0% 5%;
+    /* Very dark gray */
+    --foreground: 0 0% 95%;
+    /* Off white */
+
+    /* Dark card colors */
+    --card: 0 0% 8%;
+    /* Dark gray */
+    --card-foreground: 0 0% 95%;
+    /* Off white */
+
+    /* Dark popover colors */
+    --popover: 0 0% 8%;
+    /* Dark gray */
+    --popover-foreground: 0 0% 95%;
+    /* Off white */
+
+    /* Primary - Slightly muted green for dark mode */
+    --primary: 74 50% 45%;
+    /* Darker green */
+    --primary-foreground: 0 0% 100%;
+    /* White */
+
+    /* Secondary - Muted yellow for dark mode */
+    --secondary: 45 80% 55%;
+    /* Darker yellow */
+    --secondary-foreground: 0 0% 5%;
+    /* Very dark */
+
+    /* Dark muted colors */
+    --muted: 0 0% 15%;
+    /* Dark gray */
+    --muted-foreground: 0 0% 65%;
+    /* Medium light gray */
+
+    /* Accent - Muted orange for dark mode */
+    --accent: 32 85% 45%;
+    /* Darker orange */
+    --accent-foreground: 0 0% 100%;
+    /* White */
+
+    /* Destructive - Muted red for dark mode */
+    --destructive: 14 85% 45%;
+    /* Darker red */
+    --destructive-foreground: 0 0% 100%;
+    /* White */
+
+    /* Dark borders and inputs */
+    --border: 0 0% 18%;
+    /* Dark gray border */
+    --input: 0 0% 12%;
+    /* Darker input background */
+    --ring: 74 50% 45%;
+    /* Same as dark primary */
+
+    /* Dark mode chart colors - slightly muted versions */
+    --chart-1: 74 50% 45%;
+    /* Muted green */
+    --chart-2: 45 80% 55%;
+    /* Muted yellow */
+    --chart-3: 32 85% 45%;
+    /* Muted orange */
+    --chart-4: 20 85% 40%;
+    /* Muted dark orange */
+    --chart-5: 14 85% 45%;
+    /* Muted red */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Additional utility classes for your palette colors */
+@layer utilities {
+  .bg-palette-green {
+    background-color: hsl(74, 64%, 50%);
+  }
+
+  .bg-palette-yellow {
+    background-color: hsl(45, 100%, 67%);
+  }
+
+  .bg-palette-orange {
+    background-color: hsl(32, 100%, 50%);
+  }
+
+  .bg-palette-dark-orange {
+    background-color: hsl(20, 100%, 45%);
+  }
+
+  .bg-palette-red {
+    background-color: hsl(14, 100%, 50%);
+  }
+
+  .text-palette-green {
+    color: hsl(74, 64%, 50%);
+  }
+
+  .text-palette-yellow {
+    color: hsl(45, 100%, 67%);
+  }
+
+  .text-palette-orange {
+    color: hsl(32, 100%, 50%);
+  }
+
+  .text-palette-dark-orange {
+    color: hsl(20, 100%, 45%);
+  }
+
+  .text-palette-red {
+    color: hsl(14, 100%, 50%);
+  }
+
+  .border-palette-green {
+    border-color: hsl(74, 64%, 50%);
+  }
+
+  .border-palette-yellow {
+    border-color: hsl(45, 100%, 67%);
+  }
+
+  .border-palette-orange {
+    border-color: hsl(32, 100%, 50%);
+  }
+
+  .border-palette-dark-orange {
+    border-color: hsl(20, 100%, 45%);
+  }
+
+  .border-palette-red {
+    border-color: hsl(14, 100%, 50%);
+  }
+}
