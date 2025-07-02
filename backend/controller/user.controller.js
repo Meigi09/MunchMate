@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import User from "../models/User.js";
 import Address from "../models/address.model.js";
 import mongoose from "mongoose";
 
